@@ -1,5 +1,5 @@
 import { Model } from "mongoose";
-
+//
 export type TFullName = {
     firstName:string;
     lastName:string;
