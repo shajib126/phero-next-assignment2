@@ -1,6 +1,6 @@
 import { TOrders, TUser } from "./user.interface";
 import { User } from "./user.model";
-
+//
 const createUserIntoDB = async (userData: TUser) => {
   
   const data = await User.create(userData);
