@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userValidationSchema = void 0;
+exports.userValidationSchema = exports.orderSchema = void 0;
 const zod_1 = require("zod");
 const fullNameSchema = zod_1.z.object({
     firstName: zod_1.z.string().min(1).max(20),
     lastName: zod_1.z.string().min(1).max(20)
 });
-const orderSchema = zod_1.z.object({
-    productName: zod_1.z.string().min(1).max(20),
+exports.orderSchema = zod_1.z.object({
+    productName: zod_1.z.string(),
     price: zod_1.z.number(),
     quantity: zod_1.z.number()
 });
@@ -18,14 +18,14 @@ const addressSchema = zod_1.z.object({
 });
 exports.userValidationSchema = zod_1.z.object({
     userId: zod_1.z.number(),
-    password: zod_1.z.string(),
-    username: zod_1.z.string(),
+    username: zod_1.z.string().min(2).max(20),
+    password: zod_1.z.string().min(3).max(20),
     fullName: fullNameSchema,
-    age: zod_1.z.string(),
+    age: zod_1.z.number(),
     email: zod_1.z.string(),
-    hobbies: zod_1.z.array(zod_1.z.string()),
+    hobbies: zod_1.z.array(zod_1.z.string()).default([]),
     address: addressSchema,
-    orders: zod_1.z.array(orderSchema),
-    isActive: zod_1.z.boolean().optional().default(false)
+    orders: zod_1.z.array(exports.orderSchema).default([]),
+    isActive: zod_1.z.boolean().default(false)
 });
 exports.default = exports.userValidationSchema;

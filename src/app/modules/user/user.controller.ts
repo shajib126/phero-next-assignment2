@@ -1,14 +1,15 @@
 import { Request, Response, response } from "express";
 import { UserServices } from "./user.service";
 import { User } from "./user.model";
+import userValidationSchema, { orderSchema } from "./user.validation";
 //
 
 const createUser = async (req: Request, res: Response) => {
   try {
     const userData = req.body;
     
-   
-    const data = await UserServices.createUserIntoDB(userData);
+   const zodDat = userValidationSchema.parse(userData)
+    const data = await UserServices.createUserIntoDB(zodDat);
     
     
     res.status(201).json({
@@ -83,6 +84,7 @@ const getSingleUser = async (req: Request, res: Response) => {
 const updateUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
+   
     const data = await UserServices.updateDataFromDB(userId, req.body);
     if (!data) {
       res.status(404).json({
@@ -137,8 +139,8 @@ const deleteUser = async (req: Request, res: Response) => {
 const updateOrder = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
-
-    const data = await UserServices.updareOrderFromDB(userId, req.body);
+    const zodData = orderSchema.parse(req.body)
+    const data = await UserServices.updareOrderFromDB(userId, zodData);
     if (!data) {
       res.status(404).json({
         success: false,

@@ -101,7 +101,7 @@ const updateDataFromDB = async (userId: string,updateData:TUser) => {
     if ((await User.isFound(id)) == null) {
         return false;
       }else{
-        const data = await User.aggregate([{$match:{userId:id}},{ $unwind: '$orders' },{$group:{_id:null,orders:{$push:'$orders'}}},{$project:{_id:0,orders:"$orders"}}])
+        const data = await User.aggregate([{$match:{userId:id}},{ $unwind: '$orders' },{$group:{_id:null,orders:{$push:'$orders'}}},{$project:{_id:0,orders:{productName:1,price:1,quantity:1}}}])
         return data[0]
       }
   }

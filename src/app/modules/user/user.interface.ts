@@ -19,11 +19,11 @@ export type TUser = {
     password:string;
     username:string;
     fullName:TFullName;
-    age:string;
-    email:string;
+    age:number;
+    email?:string;
     hobbies:string[];
     address:TAddress;
-    orders:[TOrders];
+    orders:TOrders[];
     isActive:boolean;
     
 }

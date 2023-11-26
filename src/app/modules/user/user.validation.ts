@@ -4,9 +4,9 @@ const  fullNameSchema =z.object ({
     firstName:z.string().min(1).max(20),
     lastName:z.string().min(1).max(20)
 })
-const orderSchema =z.object( {
+export const orderSchema =z.object( {
     
-    productName:z.string().min(1).max(20),
+    productName:z.string(),
     price:z.number(),
     quantity:z.number()
 })
@@ -17,15 +17,15 @@ const  addressSchema =z.object( {
 })
 export const userValidationSchema =z.object({
     userId:z.number(),
-    password:z.string(),
-    username:z.string(),
+    username:z.string().min(2).max(20),
+    password:z.string().min(3).max(20),
     fullName:fullNameSchema,
-    age:z.string(),
+    age:z.number(),
     email:z.string(),
-    hobbies:z.array(z.string()),
+    hobbies:z.array(z.string()).default([]),
     address:addressSchema,
-    orders:z.array(orderSchema),
-    isActive:z.boolean().optional().default(false)
+    orders:z.array(orderSchema).default([]),
+    isActive:z.boolean().default(false)
     
 })
 

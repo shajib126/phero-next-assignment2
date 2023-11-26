@@ -52,7 +52,10 @@ const userSchema = new Schema<TUser,UserModel>({
         maxlength:[20,'password can not be more than 20']
     },
     fullName:fullNameSchema,
-   
+   age:{
+    type:Number,
+    required:[true,'age is required']
+   },
     email:{
         type:String
     },

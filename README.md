@@ -8,6 +8,7 @@
 - [x] Calculate Total price of orders for a specific user
 - [x] Error Handling in a specific format
 - [x] response data as required
+- [x] validation implemented 
 
 # APIs
 

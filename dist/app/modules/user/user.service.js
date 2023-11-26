@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserServices = void 0;
 const user_model_1 = require("./user.model");
+//
 const createUserIntoDB = (userData) => __awaiter(void 0, void 0, void 0, function* () {
     const data = yield user_model_1.User.create(userData);
     return data;
@@ -104,7 +105,7 @@ const oderByUserFromDB = (userId) => __awaiter(void 0, void 0, void 0, function*
         return false;
     }
     else {
-        const data = yield user_model_1.User.aggregate([{ $match: { userId: id } }, { $unwind: '$orders' }, { $group: { _id: null, orders: { $push: '$orders' } } }, { $project: { _id: 0, orders: "$orders" } }]);
+        const data = yield user_model_1.User.aggregate([{ $match: { userId: id } }, { $unwind: '$orders' }, { $group: { _id: null, orders: { $push: '$orders' } } }, { $project: { _id: 0, orders: { productName: 1, price: 1, quantity: 1 } } }]);
         return data[0];
     }
 });
